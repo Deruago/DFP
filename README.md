@@ -31,7 +31,50 @@ The example provided above computes a fixpoint equation named 'fixpoint'. The fi
 
 - Add more operators (currently only +, -, /, * are supported)
 - Add more special functions
+- Allow conditional logic
 - Allow any mixing of types
 - Allow custom member function invocations
 - Add (runtime) optimization mechanisms
 
+# Recursive functions
+## (Recursive) Fibonacci
+
+```C++
+#include <DFP.h>
+#include <iostream>
+
+int main()
+{
+    Fixpoint<int> fib = 0;
+    FixpointParameter n;
+    fib(0) = 1;
+    fib(1) = 1;
+    auto fibonacci = (fib(n) = fib(n - 1) + fib(n - 2));
+
+    // Prints: 55
+    std::cout << fibonacci(9) << '\n';
+
+    return 0;
+}
+```
+
+## Factorial
+
+```C++
+#include <DFP.h>
+#include <iostream>
+
+int main()
+{
+    Fixpoint<int> fac = 0;
+    FixpointParameter n;
+    fac(0) = 1;
+    fac(1) = 1;
+    auto factorial = (fac(n) = fac(n - 1) * n);
+
+    // Prints: 120
+    std::cout << factorial(5) << '\n';
+
+    return 0;
+}
+```
